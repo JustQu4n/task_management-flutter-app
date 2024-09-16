@@ -167,5 +167,8 @@
     "text_caution": "Caution",
     "text_are_you_sure_to_delete_this_project": "Are you sure to delete this project",
     "text_due_date": "Due date",
-    "text_assignees": "Assignees"
+    "text_assignees": "Assignees",
+    "today": "Today",
+    "next": "Next",
+    "all": "All"
 }
