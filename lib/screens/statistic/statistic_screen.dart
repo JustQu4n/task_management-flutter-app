@@ -36,7 +36,7 @@ class TaskDetailScreenState extends State<StatisticScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "120 task",
+                          "120 tasks",
                           style: context.textTheme.titleLarge?.copyWith(
                               fontSize: 32, fontWeight: FontWeight.w500),
                           textAlign: TextAlign.left,
