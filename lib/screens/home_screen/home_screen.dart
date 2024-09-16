@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:room_master_app/common/assets/app_assets.dart';
@@ -15,9 +13,7 @@ import 'package:room_master_app/screens/component/task_container.dart';
 import 'package:room_master_app/screens/component/tm_elevated_button.dart';
 import 'package:room_master_app/screens/qr_scanner/qr_scanner_screen.dart';
 import 'package:room_master_app/screens/statistic/statistic_project_screen.dart';
-import 'package:room_master_app/screens/statistic/statistic_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../blocs/authentication/authentication_cubit.dart';
 import 'bloc/home_screen_bloc.dart';
 
@@ -287,15 +283,15 @@ class _StatisticHomeScreenState extends State<StatisticHomeScreen>
               dividerColor: Colors.transparent,
               labelPadding: const EdgeInsets.symmetric(horizontal: 20),
               controller: _tabController,
-              tabs: const [
+              tabs:  [
                 Tab(
-                  text: 'Today',
+                  text: context.l10n.today,
                 ),
                 Tab(
-                  text: 'Next',
+                  text: context.l10n.next,
                 ),
                 Tab(
-                  text: 'All',
+                  text: context.l10n.all,
                 )
               ],
             ),
