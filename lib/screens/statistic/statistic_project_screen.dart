@@ -20,7 +20,7 @@ class _StatisticProjectState extends State<StatisticProject> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Statistic Project'),
+          title: const Text('Statistic Projects'),
           backgroundColor: context.appColors.textWhite,
           foregroundColor: context.appColors.textBlack,
           elevation: 0,
