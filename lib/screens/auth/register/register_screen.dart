@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:room_master_app/common/extensions/context.dart';
-import 'package:room_master_app/common/utils/utils.dart';
 import 'package:room_master_app/l10n/l10n.dart';
 import 'package:room_master_app/navigation/navigation.dart';
 import 'package:room_master_app/screens/auth/login/component/auth_elavated_loading_button.dart';
