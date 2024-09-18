@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:room_master_app/common/extensions/context.dart';
-import 'package:room_master_app/common/utils/utils.dart';
 import 'package:room_master_app/l10n/l10n.dart';
 import 'package:room_master_app/navigation/navigation.dart';
 import 'package:room_master_app/screens/auth/login/component/auth_elavated_loading_button.dart';
@@ -53,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (state.authException != null) {
             showAuthDialog(
               context: context,
-              title: "Login Failed",
+              title: "Register Failed",
               content: state.authException!.errorMessage(context),
               titleButton: 'Close',
               colorContent: context.appColors.textBlack,
@@ -96,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           RegisterTF(
                             hintText: context.l10n.label_username,
                             prefixIcon: Icon(
-                              Icons.email_outlined,
+                              Icons.account_circle_outlined,
                               color: context.appColors.textWhite,
                             ),
                             onTextChange: (content) {
