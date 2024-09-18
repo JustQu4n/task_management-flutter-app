@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (state.authException != null) {
             showAuthDialog(
               context: context,
-              title: "Login Failed",
+              title: "Register Failed",
               content: state.authException!.errorMessage(context),
               titleButton: 'Close',
               colorContent: context.appColors.textBlack,
@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           RegisterTF(
                             hintText: context.l10n.label_username,
                             prefixIcon: Icon(
-                              Icons.email_outlined,
+                              Icons.account_circle_outlined,
                               color: context.appColors.textWhite,
                             ),
                             onTextChange: (content) {
