@@ -55,15 +55,21 @@ class _ScaffoldWithNavState extends State<ScaffoldWithNav> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: () {
-          if (context.read<BottomNavCubit>().state == NavFunction.home) {
-            showModalBottomSheet<void>(
+        onPressed: () async  {
+          if (context.read<BottomNavCubit>().state == NavFunction.home ||
+              context.read<BottomNavCubit>().state == NavFunction.calendar ||
+              context.read<BottomNavCubit>().state == NavFunction.chat ||
+              context.read<BottomNavCubit>().state == NavFunction.profile
+          ) {
+            await showModalBottomSheet<void>(
               isScrollControlled: true,
               context: context,
               builder: (BuildContext innerContext) {
                 return const NewProjectScreen();
               },
             );
+            // After closing the modal, switch back to the home tab
+            context.read<BottomNavCubit>().setNavItemSelected(NavFunction.home);
           }
         },
         elevation: 0,
