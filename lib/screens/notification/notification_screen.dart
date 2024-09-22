@@ -87,7 +87,7 @@ class _NotificationScreenState extends State<NotificationScreen>
                     widthFactor: 1.0,
                     alignment: Alignment.center,
                     child: TabBar(
-                      tabAlignment: TabAlignment.start,
+                      tabAlignment: TabAlignment.center,
                       overlayColor: MaterialStateProperty.all(Colors.transparent),
                       isScrollable: true,
                       labelPadding: EdgeInsets.zero,
