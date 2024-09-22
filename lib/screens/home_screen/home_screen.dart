@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               child: Text(
                                 context.l10n.seeall,
-                                style: context.textTheme.bodyMedium,
+                                style: context.textTheme.bodyMedium
+                                    ?.copyWith(color: Colors.grey),
                               ),
                             ),
                           ],
