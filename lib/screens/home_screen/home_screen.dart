@@ -31,72 +31,65 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocProvider(
       create: (context) => HomeScreenCubit()..init(),
       child: Builder(builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            top: context.mediaQuery.viewPadding.top + 16,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildTopBar(context),
-              SpacerComponent.l(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _buildBanner(context),
-                      SpacerComponent.l(),
-                      _buildProjects(context),
-                      SpacerComponent.l(),
-                      Container(
-                        padding:
-                        const EdgeInsets.only(bottom: 10, left: 12, right: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                              bottom: BorderSide(
-                                  width: 1, color: context.appColors.borderColor)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              context.l10n.today_task,
-                              style: const TextStyle(
-                                  color: Colors.orangeAccent,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                context.push(NavigationPath.listTasks);
-                              },
-                              child: Text(
-                                context.l10n.seeall,
-                                style: context.textTheme.bodyMedium
-                                    ?.copyWith(color: Colors.grey),
+        return Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor, // Adapted
+          body: Padding(
+            padding: EdgeInsets.only(
+              top: context.mediaQuery.viewPadding.top + 16,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _buildTopBar(context),
+                SpacerComponent.l(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildBanner(context),
+                        SpacerComponent.l(),
+                        _buildProjects(context),
+                        SpacerComponent.l(),
+                        Container(
+                          padding:
+                          const EdgeInsets.only(bottom: 10, left: 12, right: 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                context.l10n.today_task,
+                                style: const TextStyle(
+                                    color: Colors.orangeAccent,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
+                              GestureDetector(
+                                onTap: () {
+                                  context.push(NavigationPath.listTasks);
+                                },
+                                child: Text(
+                                  context.l10n.seeall,
+                                  style: context.textTheme.bodyMedium
+                                      ?.copyWith(color: Colors.grey),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                         ),
-                      ),
-                      Container(
-                        color: Colors.grey.shade100,
-                        height: 400, // fixed height
-                        child: _buildTodayTask(),
-                      ),
-                      SpacerComponent.l(),
-                    ],
+                        Container(
+                          height: 400, // fixed height
+                          child: _buildTodayTask(),
+                        ),
+                        SpacerComponent.l(),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         );
       }),
@@ -138,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Hello'),
+                     Text(context.l10n.text_hello, style: context.textTheme.labelSmall?.copyWith(color: context.appColors.textBlack),),
                     Text(
                         context
                                 .watch<AuthenticationCubit>()
@@ -146,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .user
                                 ?.displayName ??
                             '',
-                        style: context.textTheme.labelLarge),
+                        style: context.textTheme.labelLarge?.copyWith(color: context.appColors.textBlack)),
                   ],
                 )
               ],
@@ -190,8 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     context.l10n.text_your_project,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                    style: context.textTheme.labelLarge?.copyWith(color: context.appColors.textBlack),
                     textAlign: TextAlign.start,
                   ),
                   GestureDetector(

@@ -24,6 +24,7 @@ abstract interface class AppTheme {
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
       ),
+      textTheme: darkTextTheme,
     );
   }
 }
