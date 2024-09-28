@@ -174,7 +174,6 @@ class ProjectDetailScreenState extends State<ProjectDetailScreen>
           );
         } else {
           return Container(
-            color: Colors.grey.shade100,
             child: ListView.builder(
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -569,7 +568,7 @@ class ProjectDetailScreenState extends State<ProjectDetailScreen>
                   children: [
                     Text(
                       context.l10n.text_project_description,
-                      style: context.textTheme.titleLarge,
+                      style: context.textTheme.titleLarge?.copyWith(color: context.appColors.textBlack),
                     ),
                     const SizedBox(height: 10),
                     TMTextField(
@@ -684,7 +683,7 @@ class ProjectDetailScreenState extends State<ProjectDetailScreen>
           children: [
             Text(
               context.l10n.text_attachment,
-              style: context.textTheme.titleSmall,
+              style: context.textTheme.titleSmall?.copyWith(color: context.appColors.textBlack),
             ),
             isOwnerOfProject(context)
                 ? buildAddAttachmentButton(context)
@@ -841,7 +840,7 @@ class ProjectDetailScreenState extends State<ProjectDetailScreen>
           children: [
             Text(
               context.l10n.text_description,
-              style: context.textTheme.titleMedium,
+              style: context.textTheme.titleMedium?.copyWith(color: context.appColors.textBlack),
             ),
             _isEditing
                 ? buildEditIcon(

@@ -43,9 +43,6 @@ final class UpcomingTaskScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                    ),
                     padding: const EdgeInsets.only(top: 32),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -60,7 +57,11 @@ final class UpcomingTaskScreen extends StatelessWidget {
                             children: [
                               Text(
                                 context.l10n.text_schedule,
-                                style: context.textTheme.labelLarge,
+                                style: context.textTheme.bodySmall
+                                    ?.copyWith(
+                                    color:
+                                    context.appColors.buttonEnable,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Row(
                                 children: [

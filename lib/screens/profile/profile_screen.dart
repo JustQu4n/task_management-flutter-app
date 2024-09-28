@@ -133,7 +133,7 @@ class ProfileScreen extends StatelessWidget {
                                 state.user!.displayName!.isNotEmpty
                             ? state.user!.displayName!
                             : state.user!.email!,
-                        style: context.textTheme.labelMedium,
+                        style: context.textTheme.titleMedium?.copyWith(color: context.appColors.textBlack),
                         textAlign: TextAlign.center,
                       );
                     }
@@ -145,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: context.appColors.buttonEnable,
+                        color: context.appColors.gradient_bg_3,
                         borderRadius: const BorderRadiusDirectional.all(
                             Radius.circular(8))),
                     child: ListTile(
@@ -157,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
                           child: Text(
                         context.l10n.text_edit_profile,
                         style: context.textTheme.labelMedium?.copyWith(
-                            color: context.appColors.textOnBtnEnable),
+                            color: context.appColors.bgGrayLight),
                       )),
                       onTap: () async {
                         await context.push(NavigationPath.editProfile);
