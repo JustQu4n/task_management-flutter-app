@@ -27,7 +27,7 @@ class AppColors {
     gradient_bg_3: Color(0xFF478DE0),
     gradient_bg_4: Color(0xFF398AE5),
     tfcolor: Color(0xFF6CA8F1),
-    defaultBgContainer: Color(0xFFFFFFFF),
+    defaultBgContainer: Color(0xFFEAECEE),
     failureText: Color(0xFFEF6565),
     bgGrayWhiteLight: Color(0xFFF1ECEC),
     colorDarkGray: Color(0xFF797A7C),

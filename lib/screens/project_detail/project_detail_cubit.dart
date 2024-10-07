@@ -17,6 +17,7 @@ import '../../models/dtos/project/project.dart';
 import '../../models/dtos/user/user_dto.dart';
 
 part 'project_detail_cubit.freezed.dart';
+
 part 'project_detail_state.dart';
 
 class ProjectDetailCubit extends Cubit<ProjectDetailState> {
@@ -39,12 +40,10 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
           members: project.members,
           projectDescription: project.description,
           startDate: project.startDate,
-          endDate: project.endDate
-      ));
+          endDate: project.endDate));
     });
-    notesSubscription = ProjectRepository.instance
-        .getAllNotes(projectId)
-        .listen((notes) {
+    notesSubscription =
+        ProjectRepository.instance.getAllNotes(projectId).listen((notes) {
       emit(state.copyWith(notes: notes));
     });
     tasksSubscription = ProjectRepository.instance
@@ -81,20 +80,23 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
   }
 
   void updateProject() {
-    handleUpdateProjectNotification();
+    log(state.toString());
     ProjectRepository.instance.updateProject(
-            name: state.projectName,
-            description: state.projectDescription,
-            members: state.members,
-            startDate: state.startDate!,
-            endDate: state.endDate);
+      projectId: state.project!.id,
+        name: state.projectName,
+        description: state.projectDescription,
+        members: state.members,
+        startDate: state.startDate!,
+        endDate: state.endDate);
     if (state.tasks.length != state.tasksCopy.length) {
       for (var task in state.tasks) {
         if (!state.tasksCopy.contains(task)) {
-          ProjectRepository.instance.deleteTaskFromProject(task.id, state.project!.id);
+          ProjectRepository.instance
+              .deleteTaskFromProject(task.id, state.project!.id);
         }
       }
     }
+    handleUpdateProjectNotification();
   }
 
   void updateStartDate(DateTime value) {
@@ -114,13 +116,16 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
       emit(state.copyWith(members: state.members + users));
       updateProject();
     } else {
-      emit(state.copyWith(members: state.members.where((member) => !users.contains(member)).toList()));
+      emit(state.copyWith(
+          members: state.members
+              .where((member) => !users.contains(member))
+              .toList()));
       updateProject();
     }
   }
 
   void cancelUpdateProject() {
-    if(state.project != null) {
+    if (state.project != null) {
       emit(state.copyWith(
         projectName: state.project!.name,
         projectDescription: state.project!.description,
@@ -133,17 +138,20 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
 
   void deleteTask(String taskId) {
     // ProjectRepository.instance.deleteTaskFromProject(taskId, state.project?.id ?? '');
-    emit(state.copyWith(tasksCopy: state.tasksCopy.where((task) => task.id != taskId).toList()));
+    emit(state.copyWith(
+        tasksCopy:
+            state.tasksCopy.where((task) => task.id != taskId).toList()));
   }
 
   void addAttachment({required String fileName, required String downloadUrl}) {
-    ProjectRepository.instance.addAttachmentToProject(state.project!.id, AttachmentDto(
-        id: uuid.v1(),
-        fileName: fileName,
-        filePath: downloadUrl,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now()
-    ));
+    ProjectRepository.instance.addAttachmentToProject(
+        state.project!.id,
+        AttachmentDto(
+            id: uuid.v1(),
+            fileName: fileName,
+            filePath: downloadUrl,
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now()));
   }
 
   void removeAttachment(Attachment attachment) {
@@ -174,7 +182,8 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
           userReceiveNotificationId: member.id,
         );
         NotificationRepository.instance.addNotification(notification);
-        NotificationService.instance.pushNotification(state.project!.owner.notificationToken ?? '', notification);
+        NotificationService.instance.pushNotification(
+            state.project!.owner.notificationToken ?? '', notification);
       });
     }
   }
@@ -184,12 +193,13 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
   }
 
   void addProjectNote(String note) async {
-    ProjectRepository.instance.addProjectNote(state.project!.id, NotesDto(
-        id: uuid.v1(),
-        content: note,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now()
-    ));
+    ProjectRepository.instance.addProjectNote(
+        state.project!.id,
+        NotesDto(
+            id: uuid.v1(),
+            content: note,
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now()));
   }
 
   void onChangeDueDate(DateTime e) {
@@ -201,6 +211,6 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
   }
 
   void deleteProject() {
-      ProjectRepository.instance.deleteProject(state.project!.id);
+    ProjectRepository.instance.deleteProject(state.project!.id);
   }
 }
