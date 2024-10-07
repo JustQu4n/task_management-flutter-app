@@ -16,13 +16,13 @@ class ProjectRepository {
   Future<void> addProject(ProjectDto project) =>
       _projectCollection.doc(project.id).set(project.toJson());
 
-  Future<void> updateProject({required String description, required String name, required DateTime startDate, required List<UserDto> members, DateTime? endDate}) {
-    return _projectCollection.doc().update({
+  Future<void> updateProject({ required String projectId, required String description, required String name, required DateTime startDate, required List<UserDto> members, DateTime? endDate}) {
+    return _projectCollection.doc(projectId).update({
       'description': description,
       'name': name,
-      'startDate': startDate,
-      'members': members,
-      'endDate': endDate
+      'startDate': startDate.toString(),
+      'membersId': members.map((e) => e.id,).toString(),
+      'endDate': endDate.toString()
     });
   }
 
