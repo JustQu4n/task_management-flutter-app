@@ -21,7 +21,7 @@ class ProjectRepository {
       'description': description,
       'name': name,
       'startDate': startDate.toString(),
-      'membersId': members.map((e) => e.id,).toString(),
+      'membersId': members.map((e) => e.id).toList(),
       'endDate': endDate.toString()
     });
   }
