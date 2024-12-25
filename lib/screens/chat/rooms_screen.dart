@@ -171,112 +171,116 @@ class _RoomsScreenState extends State<RoomsScreen> {
                               child: Row(
                                 children: [
                                   _buildAvatar(room),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(room.name ?? '',
-                                          style: context.textTheme.labelSmall
-                                              ?.copyWith(
-                                                  color: context
-                                                      .appColors.textBlack)),
-                                      const SizedBox(
-                                        height: 2,
-                                      ),
-                                      StreamBuilder<List<types.Message>>(
-                                          stream: FirebaseChatCore.instance
-                                              .messages(snapshot.data![index]),
-                                          builder: (context, snapshot) {
-                                            String lastMessage = '';
-                                            if (snapshot.hasData) {
-                                              switch (
-                                                  snapshot.data!.first.type) {
-                                                case types.MessageType.audio:
-                                                case types.MessageType.custom:
-                                                case types.MessageType.system:
-                                                case types
-                                                      .MessageType.unsupported:
-                                                case types.MessageType.video:
-                                                  if (snapshot.data!.first
-                                                          .author.id ==
-                                                      _user!.uid) {
-                                                    lastMessage = context.l10n
-                                                        .text_you_have_sent_a_message;
-                                                  } else {
-                                                    lastMessage = context.l10n
-                                                        .text_someone_have_sent_a_message(
-                                                            snapshot
-                                                                    .data!
-                                                                    .first
-                                                                    .author
-                                                                    .firstName ??
-                                                                '');
-                                                  }
-                                                case types.MessageType.file:
-                                                  if (snapshot.data!.first
-                                                          .author.id ==
-                                                      _user!.uid) {
-                                                    lastMessage = context.l10n
-                                                        .text_you_have_sent_a_file;
-                                                  } else {
-                                                    lastMessage = context.l10n
-                                                        .text_someone_have_sent_a_file(
-                                                            snapshot
-                                                                    .data!
-                                                                    .first
-                                                                    .author
-                                                                    .firstName ??
-                                                                '');
-                                                  }
-                                                case types.MessageType.image:
-                                                  if (snapshot.data!.first
-                                                          .author.id ==
-                                                      _user!.uid) {
-                                                    lastMessage = context.l10n
-                                                        .text_you_have_sent_an_image;
-                                                  } else {
-                                                    lastMessage = context.l10n
-                                                        .text_someone_have_sent_an_image(
-                                                            snapshot
-                                                                    .data!
-                                                                    .first
-                                                                    .author
-                                                                    .firstName ??
-                                                                '');
-                                                  }
-                                                case types.MessageType.text:
-                                                  if (snapshot.data!.first
-                                                          .author.id ==
-                                                      _user!.uid) {
-                                                    lastMessage = (snapshot
-                                                                .data!
-                                                                .first as types
-                                                            .TextMessage)
-                                                        .text;
-                                                  } else {
-                                                    lastMessage =
-                                                        '${snapshot.data?.first.author.firstName}: ${(snapshot.data!.first as types.TextMessage).text}';
-                                                  }
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(room.name ?? '',
+                                            style: context.textTheme.labelSmall
+                                                ?.copyWith(
+                                                    color: context
+                                                        .appColors.textBlack)),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        StreamBuilder<List<types.Message>>(
+                                            stream: FirebaseChatCore.instance
+                                                .messages(snapshot.data![index]),
+                                            builder: (context, snapshot) {
+                                              String lastMessage = '';
+                                              if (snapshot.hasData) {
+                                                switch (
+                                                    snapshot.data!.first.type) {
+                                                  case types.MessageType.audio:
+                                                  case types.MessageType.custom:
+                                                  case types.MessageType.system:
+                                                  case types
+                                                        .MessageType.unsupported:
+                                                  case types.MessageType.video:
+                                                    if (snapshot.data!.first
+                                                            .author.id ==
+                                                        _user!.uid) {
+                                                      lastMessage = context.l10n
+                                                          .text_you_have_sent_a_message;
+                                                    } else {
+                                                      lastMessage = context.l10n
+                                                          .text_someone_have_sent_a_message(
+                                                              snapshot
+                                                                      .data!
+                                                                      .first
+                                                                      .author
+                                                                      .firstName ??
+                                                                  '');
+                                                    }
+                                                  case types.MessageType.file:
+                                                    if (snapshot.data!.first
+                                                            .author.id ==
+                                                        _user!.uid) {
+                                                      lastMessage = context.l10n
+                                                          .text_you_have_sent_a_file;
+                                                    } else {
+                                                      lastMessage = context.l10n
+                                                          .text_someone_have_sent_a_file(
+                                                              snapshot
+                                                                      .data!
+                                                                      .first
+                                                                      .author
+                                                                      .firstName ??
+                                                                  '');
+                                                    }
+                                                  case types.MessageType.image:
+                                                    if (snapshot.data!.first
+                                                            .author.id ==
+                                                        _user!.uid) {
+                                                      lastMessage = context.l10n
+                                                          .text_you_have_sent_an_image;
+                                                    } else {
+                                                      lastMessage = context.l10n
+                                                          .text_someone_have_sent_an_image(
+                                                              snapshot
+                                                                      .data!
+                                                                      .first
+                                                                      .author
+                                                                      .firstName ??
+                                                                  '');
+                                                    }
+                                                  case types.MessageType.text:
+                                                    if (snapshot.data!.first
+                                                            .author.id ==
+                                                        _user!.uid) {
+                                                      lastMessage = (snapshot
+                                                                  .data!
+                                                                  .first as types
+                                                              .TextMessage)
+                                                          .text;
+                                                    } else {
+                                                      lastMessage =
+                                                          '${snapshot.data?.first.author.firstName}: ${(snapshot.data!.first as types.TextMessage).text}';
+                                                    }
+                                                }
+                                                return Text(lastMessage,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: context
+                                                        .textTheme.bodySmall
+                                                        ?.copyWith(
+                                                            color: context
+                                                                .appColors
+                                                                .colorDarkGray));
+                                              } else {
+                                                return Text(
+                                                    "Start your conservation here",
+                                                    style: context
+                                                        .textTheme.bodySmall
+                                                        ?.copyWith(
+                                                            color: context
+                                                                .appColors
+                                                                .colorDarkGray));
                                               }
-                                              return Text(lastMessage,
-                                                  style: context
-                                                      .textTheme.bodySmall
-                                                      ?.copyWith(
-                                                          color: context
-                                                              .appColors
-                                                              .colorDarkGray));
-                                            } else {
-                                              return Text(
-                                                  "Start your conservation here",
-                                                  style: context
-                                                      .textTheme.bodySmall
-                                                      ?.copyWith(
-                                                          color: context
-                                                              .appColors
-                                                              .colorDarkGray));
-                                            }
-                                          })
-                                    ],
+                                            })
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

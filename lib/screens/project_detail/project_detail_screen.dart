@@ -18,6 +18,7 @@ import 'package:room_master_app/common/extensions/date_time.dart';
 import 'package:room_master_app/common/utils/utils.dart';
 import 'package:room_master_app/l10n/l10n.dart';
 import 'package:room_master_app/models/dtos/project/project.dart';
+import 'package:room_master_app/navigation/navigation.dart';
 import 'package:room_master_app/screens/component/SpacerComponent.dart';
 import 'package:room_master_app/screens/component/calendar_date_picker_dialog.dart';
 import 'package:room_master_app/screens/component/empty_page.dart';
@@ -90,7 +91,11 @@ class ProjectDetailScreenState extends State<ProjectDetailScreen>
                   Icons.chat_bubble_outline,
                   color: contrastColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  final projectId = context.read<ProjectDetailCubit>().state.project?.id;
+                  context.push('${NavigationPath.chatGroup}/$projectId');
+
+                },
               ),
               Builder(builder: (context) {
                 return IconButton(

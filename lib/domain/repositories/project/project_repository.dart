@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../models/domain/project/project.dart';
 import '../../../models/dtos/project/project.dart';
@@ -589,5 +590,27 @@ class ProjectRepository {
         .collection('tasks')
         .doc(taskId)
         .update({'status': status.name});
+  }
+  Future<void> sendMessage({
+    required String projectId,
+    required String message,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      final messageData = {
+        'senderId': user.uid,
+        'senderName': user.displayName ?? 'Anonymous',
+        'message': message,
+        'timestamp': FieldValue.serverTimestamp(),
+      };
+
+      // Add message to the project's groupChat subcollection
+      await FirebaseFirestore.instance
+          .collection('projects')
+          .doc(projectId)
+          .collection('groupChat')
+          .add(messageData);
+    }
   }
 }

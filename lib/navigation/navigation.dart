@@ -10,6 +10,7 @@ import 'package:room_master_app/screens/bottom_navigation/scaffold_with_nav_scre
 import 'package:room_master_app/screens/listing/list_projects/list_project_screen.dart';
 import 'package:room_master_app/screens/notification/notification_screen.dart';
 import 'package:room_master_app/screens/profile/edit_profile_screen.dart';
+import 'package:room_master_app/screens/project_detail/chat_group/group_chat_screen.dart';
 import 'package:room_master_app/screens/statistic/statistic_screen.dart';
 import 'package:room_master_app/screens/task_detai_real/task_detail.dart';
 
@@ -40,6 +41,7 @@ abstract class NavigationPath {
   static const notification = '/notification';
   static const addMember = '/addMember';
   static const taskDetail = '/taskDetail';
+  static const chatGroup = '/chatGroup';
 }
 
 abstract class AppRouter {
@@ -127,6 +129,14 @@ abstract class AppRouter {
         path: NavigationPath.register,
         builder: (_, __) => const RegisterScreen(),
       ),
+      GoRoute(
+        path: '${NavigationPath.chatGroup}/:projectId',
+        builder: (context, state) {
+          final projectId = state.pathParameters['projectId'] ?? '';
+          return GroupChatScreen(projectId: projectId);
+        },
+      ),
+
       GoRoute(
           path: NavigationPath.notification,
           builder: (_, __) => const NotificationScreen()),

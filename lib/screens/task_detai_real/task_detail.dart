@@ -348,13 +348,13 @@ class TaskDetail extends StatelessWidget {
                                             Text(
                                               comment.author.firstName ?? '',
                                               style:
-                                                  context.textTheme.bodySmall,
+                                                  context.textTheme.bodyMedium
                                             ),
                                             Text(
                                               timeago.format(comment.createdAt),
                                               style: context.textTheme.bodySmall
                                                   ?.copyWith(
-                                                      color: Colors.grey),
+                                                      color: Colors.grey,fontStyle: FontStyle.italic),
                                             ),
                                           ],
                                         ),
@@ -367,9 +367,8 @@ class TaskDetail extends StatelessWidget {
                                         else
                                           Text(
                                             comment.content,
-                                            style: context.textTheme.bodySmall?.copyWith(
-                                                color: Colors.grey,
-                                            fontStyle: FontStyle.italic,),
+                                            style: context.textTheme.bodyMedium?.copyWith(
+                                                color:context.appColors.textBlack),
                                           ),
                                         Builder(
                                           builder: (context) {
@@ -459,6 +458,7 @@ class TaskDetail extends StatelessWidget {
 
   Column buildDescription(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           context.l10n.text_description,
@@ -644,7 +644,7 @@ class TaskDetail extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(6.0),
             child: Text(
               name,
               overflow: TextOverflow.ellipsis,
